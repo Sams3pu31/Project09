@@ -1,4 +1,4 @@
-package org.example.account;
+package org.example.account.logic;
 import org.example.account.exception.WrongLoginException;
 import org.example.account.exception.WrongLoginOrPasswordException;
 import org.example.account.exception.WrongPasswordException;
@@ -29,6 +29,9 @@ public class Account {
     public void addUserCredentials(String login, String password) {
         loginAndPasswordMap.put(login, password);
     }
+    public boolean checkIfUserExists(String inputLogin) {
+        return loginAndPasswordMap.containsKey(inputLogin);
+    }
 
     public void checkLogin(String userInput) throws WrongLoginException {
         if ( userInput == null ||  userInput.trim().isEmpty()){
@@ -45,7 +48,7 @@ public class Account {
         if (password == null || password.trim().isEmpty()) {
             throw new WrongPasswordException("Пароль не может быть пустым, заполните пароль");
         }else if (!password.equals(confirmPassword)) {
-                throw new WrongPasswordException("Пароли не совпадают");
+            throw new WrongPasswordException("Пароли не совпадают");
         }else if ( password.length() <= 8 || password.length() >= 20 ) {
             throw new WrongPasswordException("Пароль должен содержать от 9 до 19 символов");
         } else {
@@ -53,6 +56,7 @@ public class Account {
             System.out.println("Пароли совпадают");
         }
     }
+
     public String checkLoginAndPassword(String inputLogin, String inputPassword) throws WrongLoginOrPasswordException {
         if (loginAndPasswordMap.containsKey(inputLogin)) {
             String storedPassword = loginAndPasswordMap.get(inputLogin);
