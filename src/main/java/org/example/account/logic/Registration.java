@@ -19,7 +19,7 @@ public class Registration {
                 account.checkLogin(login);
                 account.checkPassword(password, confirmPassword);
                 account.addUserCredentials(login, password);
-                System.out.println("Пользователь успешно зарегистрирован!");
+                System.out.println("Пользователь "+ account.getLogin()+ " успешно зарегистрирован!");
             }
         } catch (WrongLoginException | WrongPasswordException e) {
             System.out.println("Ошибка при регистрации: " + e.getMessage());
