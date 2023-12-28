@@ -26,12 +26,13 @@ public class Main {
             account.checkPassword(password, confirmPassword);
             String result = account.checkLoginAndPassword(inputLogin, password);
             System.out.println(result);
+            if (result.equals("Вы успешно вошли в аккаунт!")) {
+                System.out.println("Текущий логин: " + account.getLogin());
+                System.out.println("Текущий пароль: " + account.getPassword());
+            }
         } catch (WrongLoginException | WrongPasswordException | WrongLoginOrPasswordException e) {
             System.out.println("Ошибка: " + e.getMessage());
         }
-
-        System.out.println("Текущий логин: " + account.getLogin());
-        System.out.println("Текущий пароль: " + account.getPassword());
     }
 }
 
